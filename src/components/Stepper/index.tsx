@@ -2,6 +2,7 @@
 
 import { cn } from "@/lib/utils"
 import { useState } from "react"
+import { Button } from "../ui/button"
 
 interface StepperProps {
   initialStep?: number
@@ -34,5 +35,21 @@ export function Stepper ({ initialStep = 0, steps }: StepperProps) {
         {steps[currentStep].content}
       </div>
     </div>
+  )
+}
+
+export function StepperPreviousButton () {
+  return (
+    <Button variant='outline' type="button">
+      Previous
+    </Button>
+  )
+}
+
+export function StepperNextButton () {
+  return (
+    <Button type="button">
+      Next
+    </Button>
   )
 }
