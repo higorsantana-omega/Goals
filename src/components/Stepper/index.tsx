@@ -70,3 +70,11 @@ export function StepperNextButton () {
     </Button>
   )
 }
+
+export function StepperFooter ({ children }: { children: React.ReactNode }) {
+  return (
+    <footer className="flex justify-end mt-6 gap-2">
+      {children}
+    </footer>
+  )
+}
