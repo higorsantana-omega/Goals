@@ -1,8 +1,9 @@
 'use client'
 
 import { cn } from "@/lib/utils"
-import { useState } from "react"
+import { useEffect } from "react"
 import { Button } from "../ui/button"
+import { useStepperStore } from "@/stores/useStepperStore"
 
 interface StepperProps {
   initialStep?: number
@@ -13,7 +14,12 @@ interface StepperProps {
 }
 
 export function Stepper ({ initialStep = 0, steps }: StepperProps) {
-  const [currentStep, setCurrentStep] = useState(initialStep)
+  const { setCurrentStep, setStepsLength, currentStep } = useStepperStore(state => state)
+  
+  useEffect(() => {
+    setCurrentStep(initialStep)
+    setStepsLength(steps.length)
+  }, [initialStep, setCurrentStep, setStepsLength, steps.length])
 
   return (
     <div>
@@ -39,16 +45,27 @@ export function Stepper ({ initialStep = 0, steps }: StepperProps) {
 }
 
 export function StepperPreviousButton () {
+  const prevStep = useStepperStore(state => state.prevStep)
+
   return (
-    <Button variant='outline' type="button">
+    <Button
+      variant='outline'
+      type="button"
+      onClick={() => prevStep()}
+    >
       Previous
     </Button>
   )
 }
 
 export function StepperNextButton () {
+  const nextStep = useStepperStore(state => state.nextStep)
+
   return (
-    <Button type="button">
+    <Button
+      type="button"
+      onClick={() => nextStep()}
+    >
       Next
     </Button>
   )
