@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from "@/lib/utils"
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import { Button } from "../ui/button"
 import { useStepperStore } from "@/stores/useStepperStore"
 
@@ -44,27 +44,48 @@ export function Stepper ({ initialStep = 0, steps }: StepperProps) {
   )
 }
 
-export function StepperPreviousButton () {
+export function StepperPreviousButton ({
+  size = 'default',
+  variant = 'outline',
+  type = 'button',
+  preventDefault = false,
+  ...props
+}: Omit<React.ComponentPropsWithoutRef<typeof Button>, 'onClick'> & { preventDefault?: boolean }) {
   const prevStep = useStepperStore(state => state.prevStep)
+
+  const prevStepHandler = !preventDefault ? prevStep : undefined
 
   return (
     <Button
-      variant='outline'
-      type="button"
-      onClick={() => prevStep()}
+      type={type}
+      size={size}
+      variant={variant}
+      onClick={prevStepHandler}
+      {...props}
     >
       Previous
     </Button>
   )
 }
 
-export function StepperNextButton () {
+export function StepperNextButton ({
+  size = 'default',
+  variant = 'default',
+  type = 'button',
+  preventDefault = false,
+  ...props
+}: Omit<React.ComponentPropsWithoutRef<typeof Button>, 'onClick'> & { preventDefault?: boolean }) {
   const nextStep = useStepperStore(state => state.nextStep)
+
+  const nextStepHandler = !preventDefault ? nextStep : undefined
 
   return (
     <Button
-      type="button"
-      onClick={() => nextStep()}
+      type={type}
+      size={size}
+      variant={variant}
+      onClick={nextStepHandler}
+      {...props}
     >
       Next
     </Button>
