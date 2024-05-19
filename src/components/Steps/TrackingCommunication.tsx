@@ -3,12 +3,14 @@ import { StepHeader } from "../StepHeader";
 import { StepperFooter, StepperNextButton, StepperPreviousButton } from "../Stepper";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { useStepperStore } from "@/stores/useStepperStore";
 import { FormData } from "@/app/new-goal/page";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
 export const trackingCommunicationStepSchema = z.object({
-  progress: z.string().min(1),
+  goal: z.string().min(1),
   notification: z.string().min(1)
 })
 
@@ -36,18 +38,37 @@ export function TrackingCommunication () {
 
       <div className="space-y-4">
         <div className="space-y-2">
-          <Label htmlFor="progress">Progress</Label>
-          <Input id="progress" {...form.register('trackingCommunicationStep.progress')} />
-          {form.formState.errors.trackingCommunicationStep?.progress && (
+          <Label htmlFor="goal">Goal</Label>
+          <Input type="number" id="goal" {...form.register('trackingCommunicationStep.goal')} />
+          {form.formState.errors.trackingCommunicationStep?.goal && (
             <small className="text-destructive">
-              {form.formState.errors.trackingCommunicationStep.progress.message}
+              {form.formState.errors.trackingCommunicationStep.goal.message}
             </small>
           )}
         </div>
 
         <div className="space-y-2">
           <Label htmlFor="notification">Notification</Label>
-          <Input id="notification" {...form.register('trackingCommunicationStep.notification')} />
+          <Controller
+            control={form.control}
+            name='trackingCommunicationStep.notification'
+            render={({ field: { onChange, value }}) => (
+              <RadioGroup
+                onValueChange={onChange}
+                defaultValue={value}
+                className="flex flex-col space-y-1"
+              >
+                <div className="flex items-center space-x-3 space-y-0">
+                  <RadioGroupItem value='true' />
+                  <span>Yes, I want to receive notifications about my goals</span>
+                </div>
+                <div className="flex items-center space-x-3 space-y-0">
+                  <RadioGroupItem value='false' />
+                  <span>No, I don&apos;t want to receive notifications about my goals</span>
+                </div>
+              </RadioGroup>
+            )}
+          />
           {form.formState.errors.trackingCommunicationStep?.notification && (
             <small className="text-destructive">
               {form.formState.errors.trackingCommunicationStep.notification.message}
