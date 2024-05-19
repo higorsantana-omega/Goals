@@ -1,4 +1,4 @@
-import { pgTable, serial, text, date, boolean, pgEnum, integer } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, date, boolean, pgEnum, integer, timestamp } from "drizzle-orm/pg-core";
 
 export const categories = [
   "Health", "Fitness", "Finance", "Career", "Personal Growth",
@@ -29,8 +29,10 @@ export const goals = pgTable("goals", {
   category: categoriesEnum("category").notNull(),
   priority: prioritiesEnum("priority").notNull(),
   resources: text("resources"),
+  currentProgress: integer("currentProgress"),
   goal: integer("goal").notNull(),
   notification: boolean("notification").notNull(),
   tags: text("tags").notNull(),
-  additionalNotes: text("additionalNotes").notNull()
+  additionalNotes: text("additionalNotes").notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull()
 })
