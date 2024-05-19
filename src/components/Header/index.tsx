@@ -7,12 +7,12 @@ export function Header () {
   return (
     <header className="flex items-center justify-between h-16 px-4 md:px-6 border-b shrink-0">
       <div className="flex items-center gap-6">
-        <Link className="flex items-center justify-center" href="#">
+        <Link className="flex items-center justify-center" href="/">
           <Logo className="h-6 w-6" />
           <span className="sr-only">Goals</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6">
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
+          <Link className="text-sm font-medium hover:underline underline-offset-4" href="/">
             Goals
           </Link>
           <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
