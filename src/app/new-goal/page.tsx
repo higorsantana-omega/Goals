@@ -8,6 +8,7 @@ import { TrackingCommunication, trackingCommunicationStepSchema } from "@/compon
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
+import { createGoal } from "../actions";
 
 const schema = z.object({
   goalDetailsStep: goalDetailsStepSchema,
@@ -24,17 +25,15 @@ export default function NewGoalPage () {
     defaultValues: {
       goalDetailsStep: {
         title: '',
-        description: '',
-        startDate: '',
-        expectedCompletionDate: ''
+        description: ''
       },
       planningResourcesStep: {
-        category: '',
-        priority: '',
+        category: 'Other',
+        priority: 'Low',
         resources: ''
       },
       trackingCommunicationStep: {
-        progress: '',
+        goal: '',
         notification: ''
       },
       additionalCustomizationStep: {
@@ -45,14 +44,26 @@ export default function NewGoalPage () {
     mode: 'onChange'
   })
 
-  const handleSubmit = form.handleSubmit(formData => {
-    console.log({ formData })
-  })
+  async function onSubmit(data: FormData) {
+    await createGoal({
+      title: data.goalDetailsStep.title,
+      description: data.goalDetailsStep.description,
+      startDate: data.goalDetailsStep.startDate.toISOString(),
+      expectedCompletionDate: data.goalDetailsStep.expectedCompletionDate.toISOString(),
+      category: data.planningResourcesStep.category,
+      priority: data.planningResourcesStep.priority,
+      resources: data.planningResourcesStep.resources,
+      goal: Number(data.trackingCommunicationStep.goal),
+      notification: data.trackingCommunicationStep.notification === 'true' ? true : false,
+      tags: data.additionalCustomizationStep.tags,
+      additionalNotes: data.additionalCustomizationStep.additionalNotes
+    })
+  }
 
   return (
     <div className="min-h-screen flex justify-center">
       <FormProvider {...form}>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <Stepper 
             steps={[
               {
