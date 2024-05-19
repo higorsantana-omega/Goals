@@ -1,4 +1,4 @@
-import { pgTable, serial, text, date, boolean, pgEnum, integer, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, date, boolean, pgEnum, integer, timestamp, varchar } from "drizzle-orm/pg-core";
 
 export const categories = [
   "Health", "Fitness", "Finance", "Career", "Personal Growth",
@@ -19,6 +19,11 @@ export const prioritiesEnum = pgEnum(
   [...priorities]
 )
 
+export const users = pgTable('users', {
+  id: serial('id').primaryKey(),
+  email: varchar('email', { length: 64 }),
+  password: varchar('password', { length: 64 })
+})
 
 export const goals = pgTable("goals", {
   id: serial("id").primaryKey(),
