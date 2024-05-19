@@ -3,6 +3,8 @@ import { CardContent, CardDate, CardDescription, CardFooter, CardIcon, CardRoot,
 
 export async function Goals () {
   const goalsData = await getGoals()
+  console.log(goalsData)
+  
   return (
     <>
       {goalsData.map(goal => (
@@ -12,8 +14,14 @@ export async function Goals () {
           <CardContent>
             <CardTitle>{goal.title}</CardTitle>
             <CardDescription>{goal.description}</CardDescription>
-            <CardFooter />
-            <CardDate />
+            <CardFooter
+              currentProgress={goal.currentProgress}
+              goal={goal.goal}
+            />
+            <CardDate
+              startDate={goal.startDate}
+              endDate={goal.expectedCompletionDate}
+            />
           </CardContent>
         </CardRoot>
       ))}

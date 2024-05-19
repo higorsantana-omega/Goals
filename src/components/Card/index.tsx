@@ -30,13 +30,20 @@ export function CardDescription ({ children }: { children: React.ReactNode }) {
   )
 }
 
-export function CardFooter () {
+interface CardFooterProps {
+  currentProgress?: number | null
+  goal: number
+}
+
+export function CardFooter ({ currentProgress, goal }: CardFooterProps) {
+  const diffInPercentage = ((currentProgress ?? 0) / goal) * 100
+
   return (
     <div className="mt-2 flex items-center justify-between gap-4">
-      <Progress value={75} />
+      <Progress value={diffInPercentage} />
       <div className="flex gap-1">
         <Button size="sm" variant="outline">
-          75%
+          {diffInPercentage.toFixed(2)}%
         </Button>
         <Button size="sm" variant="outline">
           Edit
@@ -46,18 +53,23 @@ export function CardFooter () {
   )
 }
 
-export function CardDate () {
+interface CardDateProps {
+  startDate: string
+  endDate: string
+}
+
+export function CardDate ({ startDate, endDate}: CardDateProps) {
   return (
-    <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
-      <span>Start Date: April 1, 2023</span>
-      <span>End Date: June 30, 2023</span>
+    <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
+      <span>Start Date: {startDate}</span>
+      <span>End Date: {endDate}</span>
     </div>
   )
 } 
 
 export function CardRoot ({ children }: { children: React.ReactNode }) {
   return (
-    <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-950">
+    <div className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-950 max-w-[500px]">
       <div className="flex items-start gap-4">
         {children}
       </div>
