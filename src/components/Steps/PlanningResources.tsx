@@ -3,14 +3,19 @@ import { StepHeader } from "../StepHeader";
 import { StepperFooter, StepperNextButton, StepperPreviousButton } from "../Stepper";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { FormData } from "@/app/new-goal/page";
 import { useStepperStore } from "@/stores/useStepperStore";
+import { categories, priorities } from "../../../drizzle/schema";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Textarea } from "../ui/textarea";
 
 export const planningResourcesStepSchema = z.object({
-  category: z.string().min(1),
-  priority: z.string().min(1),
-  resources: z.string().min(1)
+  category: z.enum(categories),
+  priority: z.enum(priorities),
+  resources: z.string()
+    .max(300, 'Resources must be at most 250 characters')
+    .optional()
 })
 
 export function PlanningResources () {
@@ -38,7 +43,24 @@ export function PlanningResources () {
       <div className="space-y-4">
         <div className="space-y-2">
           <Label htmlFor="category">Category</Label>
-          <Input id="category" {...form.register('planningResourcesStep.category')} />
+          <Controller
+            control={form.control}
+            name='planningResourcesStep.category'
+            render={({ field: { onChange, value }}) => (
+              <Select onValueChange={onChange} defaultValue={value}>
+                <>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a verified email to display" />
+                  </SelectTrigger>
+                </>
+                <SelectContent>
+                  {categories.map((category, index) => (
+                    <SelectItem key={index} value={category}>{category}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
           {form.formState.errors.planningResourcesStep?.category && (
             <small className="text-destructive">
               {form.formState.errors.planningResourcesStep.category.message}
@@ -48,7 +70,24 @@ export function PlanningResources () {
 
         <div className="space-y-2">
           <Label htmlFor="priority">Priority</Label>
-          <Input id="priority" {...form.register('planningResourcesStep.priority')} />
+          <Controller
+            control={form.control}
+            name='planningResourcesStep.priority'
+            render={({ field: { onChange, value }}) => (
+              <Select onValueChange={onChange} defaultValue={value}>
+                <>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a verified email to display" />
+                  </SelectTrigger>
+                </>
+                <SelectContent>
+                  {priorities.map((priority, index) => (
+                    <SelectItem key={index} value={priority}>{priority}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+          />
           {form.formState.errors.planningResourcesStep?.priority && (
             <small className="text-destructive">
               {form.formState.errors.planningResourcesStep.priority.message}
@@ -58,7 +97,7 @@ export function PlanningResources () {
 
         <div className="space-y-2">
           <Label htmlFor="resources">Resources to Achieve the Goal</Label>
-          <Input id="resources" {...form.register('planningResourcesStep.resources')} />
+          <Textarea id="resources" {...form.register('planningResourcesStep.resources')} />
           {form.formState.errors.planningResourcesStep?.resources && (
             <small className="text-destructive">
               {form.formState.errors.planningResourcesStep.resources.message}
