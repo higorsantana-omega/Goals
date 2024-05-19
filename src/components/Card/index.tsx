@@ -1,6 +1,7 @@
 import { TargetIcon } from "@radix-ui/react-icons"
 import { Progress } from "../ui/progress"
 import { Button } from "../ui/button"
+import { Badge } from "../ui/badge"
 
 export function CardIcon () {
   return (
@@ -18,9 +19,25 @@ export function CardContent ({ children }: { children: React.ReactNode }) {
   )
 }
 
+export function CardHeader ({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flex items-center justify-between">
+      {children}
+    </div>
+  )
+}
+
 export function CardTitle ({ children }: { children: React.ReactNode }) {
   return (
     <h3 className="text-lg font-semibold">{children}</h3>
+  )
+}
+
+export function CardBadge ({ children }: { children: React.ReactNode }) {
+  return (
+    <Badge className="px-2 py-1 rounded-md text-xs font-medium" variant="outline">
+      {children}
+    </Badge>
   )
 }
 

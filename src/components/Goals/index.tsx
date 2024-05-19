@@ -1,9 +1,8 @@
 import { getGoals } from "@/app/actions"
-import { CardContent, CardDate, CardDescription, CardFooter, CardIcon, CardRoot, CardTitle } from "../Card"
+import { CardBadge, CardContent, CardDate, CardDescription, CardFooter, CardHeader, CardIcon, CardRoot, CardTitle } from "../Card"
 
 export async function Goals () {
   const goalsData = await getGoals()
-  console.log(goalsData)
   
   return (
     <>
@@ -12,8 +11,16 @@ export async function Goals () {
           <CardIcon />
       
           <CardContent>
-            <CardTitle>{goal.title}</CardTitle>
-            <CardDescription>{goal.description}</CardDescription>
+            <CardHeader>
+              <CardTitle>{goal.title}</CardTitle>
+              <div className="flex gap-1">
+                <CardBadge>{goal.category}</CardBadge>
+                <CardBadge>{goal.priority}</CardBadge>
+              </div>
+            </CardHeader>
+            <CardDescription>
+              {goal.description?.length ? goal.description : 'None description'}
+            </CardDescription>
             <CardFooter
               currentProgress={goal.currentProgress}
               goal={goal.goal}
