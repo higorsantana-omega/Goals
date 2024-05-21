@@ -1,7 +1,7 @@
 import { FormLogin } from '@/components/FormLogin';
 import { SubmitLogin } from '@/components/SubmitLogin';
 import Link from 'next/link';
-import { signIn } from '../../auth';
+import { login } from '../actions';
 
 export default function Login() {
   return (
@@ -14,14 +14,7 @@ export default function Login() {
           </p>
         </div>
         <FormLogin
-          action={async (formData: FormData) => {
-            'use server';
-            await signIn('credentials', {
-              redirectTo: '/protected',
-              email: formData.get('email') as string,
-              password: formData.get('password') as string,
-            });
-          }}
+          action={login}
         >
           <SubmitLogin>Sign in</SubmitLogin>
           <p className="text-center text-sm text-gray-600">
