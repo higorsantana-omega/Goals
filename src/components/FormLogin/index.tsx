@@ -1,12 +1,14 @@
 'use client'
 
+import { useEffect } from "react";
+
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
+import { useFormState } from "react-dom";
+
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { useFormState } from "react-dom";
 import { useToast } from "../ui/use-toast";
-import { useEffect } from "react";
 
 const loginInitialState = {
 	message: '',
@@ -71,14 +73,14 @@ export function FormLogin({
         {children}
 
         <div className="flex items-center space-x-2">
-          <hr className="flex-grow border-zinc-200 dark:border-zinc-700" />
+          <hr className="grow border-zinc-200 dark:border-zinc-700" />
           <span className="text-zinc-400 dark:text-zinc-300 text-sm">OR</span>
-          <hr className="flex-grow border-zinc-200 dark:border-zinc-700" />
+          <hr className="grow border-zinc-200 dark:border-zinc-700" />
         </div>
     
         <Button className="w-full bg-black text-white" variant="outline">
           <div className="flex items-center justify-center">
-            <GitHubLogoIcon className="w-5 h-5 mr-2" />
+            <GitHubLogoIcon className="size-5 mr-2" />
             Login with GitHub
           </div>
         </Button>

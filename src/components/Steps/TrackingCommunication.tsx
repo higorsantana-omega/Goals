@@ -1,12 +1,13 @@
+import { Controller, useFormContext } from "react-hook-form";
 import { z } from "zod";
+
+import { FormData } from "@/app/new-goal/page";
+import { useStepperStore } from "@/stores/useStepperStore";
+
 import { StepHeader } from "../StepHeader";
 import { StepperFooter, StepperNextButton, StepperPreviousButton } from "../Stepper";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { Controller, useFormContext } from "react-hook-form";
-import { useStepperStore } from "@/stores/useStepperStore";
-import { FormData } from "@/app/new-goal/page";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 
 export const trackingCommunicationStepSchema = z.object({

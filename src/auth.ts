@@ -1,6 +1,7 @@
+import { compare } from 'bcrypt-ts';
 import NextAuth, { User } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
-import { compare } from 'bcrypt-ts';
+
 import { getUser } from './app/actions';
 import { authConfig } from './auth.config'
 
@@ -18,7 +19,7 @@ export const {
         email: { label: 'email', type: 'text' },
         password: { label: 'password', type: 'password' },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const [user] = await getUser(credentials.email as string)
         if (!user) return null
 

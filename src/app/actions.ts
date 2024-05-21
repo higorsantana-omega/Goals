@@ -1,12 +1,15 @@
 'use server'
 
-import { eq } from "drizzle-orm";
-import db from "../../drizzle"
-import * as schema from '../../drizzle/schema'
 import { genSaltSync, hashSync } from 'bcrypt-ts'
+import { eq } from "drizzle-orm";
+import { AuthError } from "next-auth";
+
 import { signIn, signOut } from "@/auth";
 import { loginSchema } from "@/types/schema";
-import { AuthError } from "next-auth";
+
+import db from "../../drizzle"
+import * as schema from '../../drizzle/schema'
+
 
 type NewGoal = typeof schema.goals.$inferInsert;
 

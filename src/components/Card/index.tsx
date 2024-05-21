@@ -1,12 +1,13 @@
 import { TargetIcon } from "@radix-ui/react-icons"
-import { Progress } from "../ui/progress"
-import { Button } from "../ui/button"
+
 import { Badge } from "../ui/badge"
+import { Button } from "../ui/button"
+import { Progress } from "../ui/progress"
 
 export function CardIcon () {
   return (
-    <div className="flex h-10 w-10 p-2 items-center justify-center rounded-md bg-gray-100 dark:bg-gray-800">
-      <TargetIcon className="h-5 w-5 text-gray-500 dark:text-gray-400" />
+    <div className="flex size-10 p-2 items-center justify-center rounded-md bg-gray-100 dark:bg-gray-800">
+      <TargetIcon className="size-5 text-gray-500 dark:text-gray-400" />
     </div>
   )
 }

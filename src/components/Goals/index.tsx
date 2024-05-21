@@ -1,4 +1,5 @@
 import { getGoals } from "@/app/actions"
+
 import { CardBadge, CardContent, CardDate, CardDescription, CardFooter, CardHeader, CardIcon, CardRoot, CardTitle } from "../Card"
 
 export async function Goals () {

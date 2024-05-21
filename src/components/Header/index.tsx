@@ -1,6 +1,8 @@
 import Link from "next/link"
+
 import { Button } from "@/components/ui/button"
-import { DropdownMenuTrigger, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuItem, DropdownMenuContent, DropdownMenu } from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+
 import { Logo } from "../Logo"
 
 export function Header () {
@@ -8,7 +10,7 @@ export function Header () {
     <header className="flex items-center justify-between h-16 px-4 md:px-6 border-b shrink-0">
       <div className="flex items-center gap-6">
         <Link className="flex items-center justify-center" href="/">
-          <Logo className="h-6 w-6" />
+          <Logo className="size-6" />
           <span className="sr-only">Goals</span>
         </Link>
         <nav className="hidden md:flex items-center gap-6">

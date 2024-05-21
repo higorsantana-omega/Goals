@@ -1,14 +1,16 @@
 'use client'
 
 import { useFormContext } from "react-hook-form";
+import { z } from "zod";
+
+import { FormData } from "@/app/new-goal/page";
+
 import { StepHeader } from "../StepHeader";
 import { StepperFooter, StepperPreviousButton } from "../Stepper";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { FormData } from "@/app/new-goal/page";
-import { useStepperStore } from "@/stores/useStepperStore";
-import { z } from "zod";
+
 
 export const additionalCustomizationStepSchema = z.object({
   tags: z.string().min(1),
@@ -17,8 +19,6 @@ export const additionalCustomizationStepSchema = z.object({
 
 export function AdditionalCustomization () {
   const form = useFormContext<FormData>()
-
-  const nextStep = useStepperStore(state => state.nextStep)
 
   return (
     <div>

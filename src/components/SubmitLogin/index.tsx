@@ -1,8 +1,9 @@
 'use client'
 
-import { useFormStatus } from "react-dom";
-import { Button } from "../ui/button";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { useFormStatus } from "react-dom";
+
+import { Button } from "../ui/button";
 
 export function SubmitLogin ({ children }: { children: React.ReactNode }) {
   const { pending } = useFormStatus()
@@ -15,7 +16,7 @@ export function SubmitLogin ({ children }: { children: React.ReactNode }) {
       className="w-full"
     >
       {pending && <>
-        <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+        <ReloadIcon className="mr-2 size-4 animate-spin" />
         Please wait
       </>}
 

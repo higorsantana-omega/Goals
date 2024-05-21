@@ -1,6 +1,8 @@
+import Link from 'next/link';
+
 import { FormLogin } from '@/components/FormLogin';
 import { SubmitLogin } from '@/components/SubmitLogin';
-import Link from 'next/link';
+
 import { login } from '../actions';
 
 export default function Login() {

@@ -1,12 +1,13 @@
-import { z } from "zod";
-import { StepHeader } from "../StepHeader";
-import { StepperFooter, StepperNextButton, StepperPreviousButton } from "../Stepper";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
 import { Controller, useFormContext } from "react-hook-form";
+import { z } from "zod";
+
 import { FormData } from "@/app/new-goal/page";
 import { useStepperStore } from "@/stores/useStepperStore";
+
 import { categories, priorities } from "../../../drizzle/schema";
+import { StepHeader } from "../StepHeader";
+import { StepperFooter, StepperNextButton, StepperPreviousButton } from "../Stepper";
+import { Label } from "../ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Textarea } from "../ui/textarea";
 

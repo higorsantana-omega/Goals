@@ -1,9 +1,12 @@
 'use client'
 
-import { cn } from "@/lib/utils"
 import React, { useEffect } from "react"
-import { Button } from "../ui/button"
+
+import { cn } from "@/lib/utils"
 import { useStepperStore } from "@/stores/useStepperStore"
+
+import { Button } from "../ui/button"
+
 
 interface StepperProps {
   initialStep?: number

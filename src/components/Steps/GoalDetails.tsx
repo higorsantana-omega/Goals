@@ -1,16 +1,17 @@
 'use client'
 
-import { useEffect } from "react";
+import { Controller, useFormContext } from 'react-hook-form'
+import { z } from 'zod'
+
+import { FormData } from "@/app/new-goal/page";
+import { useStepperStore } from "@/stores/useStepperStore";
+
+import { DatePicker } from "../DatePicker";
 import { StepHeader } from "../StepHeader";
 import { StepperFooter, StepperNextButton } from "../Stepper";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { Controller, useFormContext } from 'react-hook-form'
-import { z } from 'zod'
-import { FormData } from "@/app/new-goal/page";
-import { useStepperStore } from "@/stores/useStepperStore";
 import { Textarea } from "../ui/textarea";
-import { DatePicker } from "../DatePicker";
 
 export const goalDetailsStepSchema = z.object({
   title: z.string().min(2, 'Title must be at least 2 characters'),

@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+
 import { FormLogin } from '@/components/FormLogin';
 import { SubmitLogin } from '@/components/SubmitLogin';
+
 import { createUser, getUser } from '../actions';
 
 export default function Login() {

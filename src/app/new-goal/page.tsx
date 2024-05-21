@@ -1,13 +1,15 @@
 'use client'
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FormProvider, useForm } from "react-hook-form";
+import { z } from "zod";
+
 import { Stepper } from "@/components/Stepper";
 import { AdditionalCustomization, additionalCustomizationStepSchema } from "@/components/Steps/AdditionalCustomization";
 import { GoalDetails, goalDetailsStepSchema } from "@/components/Steps/GoalDetails";
 import { PlanningResources, planningResourcesStepSchema } from "@/components/Steps/PlanningResources";
 import { TrackingCommunication, trackingCommunicationStepSchema } from "@/components/Steps/TrackingCommunication";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
-import { z } from "zod";
+
 import { createGoal } from "../actions";
 
 const schema = z.object({
