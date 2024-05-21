@@ -1,38 +1,23 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
-import { Header } from "@/components/Header";
-import { MotivationalPhrase } from "@/components/MotivationalPhrase";
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Goals",
-  // icons: {
-  //   icon: {
-  //     url: "/favicon.ico",
-  //   }
-  // }
-};
+  title: "Goals"
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
-        <MotivationalPhrase />
-        <section className="py-12 md:py-24">
-          <div className="container px-4 md:px-6">
-            <div className="space-y-6">
-              {children}
-            </div>
-          </div>
-        </section>
+        {children}
       </body>
     </html>
-  );
+  )
 }
