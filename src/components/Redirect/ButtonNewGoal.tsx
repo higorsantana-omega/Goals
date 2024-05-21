@@ -1,11 +1,11 @@
 'use client'
 
-import { PlusIcon } from "@radix-ui/react-icons";
-import { useRouter } from "next/navigation";
+import { PlusIcon } from '@radix-ui/react-icons'
+import { useRouter } from 'next/navigation'
 
-import { Button } from "../ui/button";
+import { Button } from '../ui/button'
 
-export function ButtonNewGoal () {
+export function ButtonNewGoal() {
   const router = useRouter()
 
   return (

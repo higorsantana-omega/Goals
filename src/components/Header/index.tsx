@@ -1,28 +1,35 @@
-import Link from "next/link"
+import Link from 'next/link'
 
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
 
-import { Logo } from "../Logo"
+import { Logo } from '../Logo'
 
-export function Header () {
+export function Header() {
   return (
-    <header className="flex items-center justify-between h-16 px-4 md:px-6 border-b shrink-0">
+    <header className="flex h-16 shrink-0 items-center justify-between border-b px-4 md:px-6">
       <div className="flex items-center gap-6">
         <Link className="flex items-center justify-center" href="/">
           <Logo className="size-6" />
           <span className="sr-only">Goals</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-6">
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="/">
+        <nav className="hidden items-center gap-6 md:flex">
+          <Link className="text-sm font-medium underline-offset-4 hover:underline" href="/">
             Goals
           </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="#">
+          <Link className="text-sm font-medium underline-offset-4 hover:underline" href="#">
             About
           </Link>
         </nav>
       </div>
-      
+
       <div className="flex items-center gap-4">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

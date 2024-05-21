@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand'
 
 export type StepperState = {
   stepsLength: number
@@ -19,10 +19,10 @@ export const defaultInitState: Partial<StepperStore> = {
   currentStep: 0
 }
 
-export const useStepperStore = create<StepperStore>(set => ({
-  ...defaultInitState as StepperStore,
+export const useStepperStore = create<StepperStore>((set) => ({
+  ...(defaultInitState as StepperStore),
   setStepsLength: (stepsLength: number) => set({ stepsLength }),
   setCurrentStep: (step: number) => set({ currentStep: step }),
-  nextStep: () => set(state => ({ ...state, currentStep: Math.min(state.currentStep + 1) })),
-  prevStep: () => set(state => ({ ...state, currentStep: Math.max(0, state.currentStep - 1) }))
+  nextStep: () => set((state) => ({ ...state, currentStep: Math.min(state.currentStep + 1) })),
+  prevStep: () => set((state) => ({ ...state, currentStep: Math.max(0, state.currentStep - 1) }))
 }))

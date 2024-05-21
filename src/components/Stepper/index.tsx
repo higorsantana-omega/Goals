@@ -1,12 +1,11 @@
 'use client'
 
-import React, { useEffect } from "react"
+import React, { useEffect } from 'react'
 
-import { cn } from "@/lib/utils"
-import { useStepperStore } from "@/stores/useStepperStore"
+import { cn } from '@/lib/utils'
+import { useStepperStore } from '@/stores/useStepperStore'
 
-import { Button } from "../ui/button"
-
+import { Button } from '../ui/button'
 
 interface StepperProps {
   initialStep?: number
@@ -16,9 +15,9 @@ interface StepperProps {
   }[]
 }
 
-export function Stepper ({ initialStep = 0, steps }: StepperProps) {
-  const { setCurrentStep, setStepsLength, currentStep } = useStepperStore(state => state)
-  
+export function Stepper({ initialStep = 0, steps }: StepperProps) {
+  const { setCurrentStep, setStepsLength, currentStep } = useStepperStore((state) => state)
+
   useEffect(() => {
     setCurrentStep(initialStep)
     setStepsLength(steps.length)
@@ -31,7 +30,7 @@ export function Stepper ({ initialStep = 0, steps }: StepperProps) {
           <li
             key={step.label}
             className={cn(
-              "inline-block text-sm px-3 py-2 rounded-md",
+              'inline-block rounded-md px-3 py-2 text-sm',
               index === currentStep && 'bg-primary text-primary-foreground'
             )}
           >
@@ -40,61 +39,43 @@ export function Stepper ({ initialStep = 0, steps }: StepperProps) {
         ))}
       </ul>
 
-      <div className="mt-10">
-        {steps[currentStep].content}
-      </div>
+      <div className="mt-10">{steps[currentStep].content}</div>
     </div>
   )
 }
 
-export function StepperPreviousButton ({
+export function StepperPreviousButton({
   size = 'default',
   variant = 'outline',
   type = 'button',
   onClick,
   ...props
 }: React.ComponentPropsWithoutRef<typeof Button>) {
-  const prevStep = useStepperStore(state => state.prevStep)
+  const prevStep = useStepperStore((state) => state.prevStep)
 
   return (
-    <Button
-      type={type}
-      size={size}
-      variant={variant}
-      onClick={onClick ?? prevStep}
-      {...props}
-    >
+    <Button type={type} size={size} variant={variant} onClick={onClick ?? prevStep} {...props}>
       Previous
     </Button>
   )
 }
 
-export function StepperNextButton ({
+export function StepperNextButton({
   size = 'default',
   variant = 'default',
   type = 'button',
   onClick,
   ...props
 }: React.ComponentPropsWithoutRef<typeof Button>) {
-  const nextStep = useStepperStore(state => state.nextStep)
+  const nextStep = useStepperStore((state) => state.nextStep)
 
   return (
-    <Button
-      type={type}
-      size={size}
-      variant={variant}
-      onClick={onClick ?? nextStep}
-      {...props}
-    >
+    <Button type={type} size={size} variant={variant} onClick={onClick ?? nextStep} {...props}>
       Next
     </Button>
   )
 }
 
-export function StepperFooter ({ children }: { children: React.ReactNode }) {
-  return (
-    <footer className="flex justify-end mt-6 gap-2">
-      {children}
-    </footer>
-  )
+export function StepperFooter({ children }: { children: React.ReactNode }) {
+  return <footer className="mt-6 flex justify-end gap-2">{children}</footer>
 }

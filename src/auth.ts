@@ -1,15 +1,15 @@
-import { compare } from 'bcrypt-ts';
-import NextAuth, { User } from 'next-auth';
-import Credentials from 'next-auth/providers/credentials';
+import { compare } from 'bcrypt-ts'
+import NextAuth, { User } from 'next-auth'
+import Credentials from 'next-auth/providers/credentials'
 
-import { getUser } from './app/actions';
+import { getUser } from './app/actions'
 import { authConfig } from './auth.config'
 
 export const {
   handlers: { GET, POST },
   auth,
   signIn,
-  signOut,
+  signOut
 } = NextAuth({
   ...authConfig,
   providers: [
@@ -17,7 +17,7 @@ export const {
       name: 'credentials',
       credentials: {
         email: { label: 'email', type: 'text' },
-        password: { label: 'password', type: 'password' },
+        password: { label: 'password', type: 'password' }
       },
       async authorize(credentials) {
         const [user] = await getUser(credentials.email as string)
@@ -28,9 +28,9 @@ export const {
 
         return {
           id: user.id,
-          email: user.email!,
+          email: user.email!
         } as unknown as User
       }
     })
-  ],
-});
+  ]
+})

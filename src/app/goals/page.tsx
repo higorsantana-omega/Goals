@@ -1,5 +1,5 @@
-import { Goals } from "@/components/Goals";
-import { ButtonNewGoal } from "@/components/Redirect/ButtonNewGoal";
+import { Goals } from '@/components/Goals'
+import { ButtonNewGoal } from '@/components/Redirect/ButtonNewGoal'
 
 export default function PageGoals() {
   return (

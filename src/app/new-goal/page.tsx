@@ -1,16 +1,16 @@
 'use client'
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { FormProvider, useForm } from "react-hook-form";
-import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod'
+import { FormProvider, useForm } from 'react-hook-form'
+import { z } from 'zod'
 
-import { Stepper } from "@/components/Stepper";
-import { AdditionalCustomization, additionalCustomizationStepSchema } from "@/components/Steps/AdditionalCustomization";
-import { GoalDetails, goalDetailsStepSchema } from "@/components/Steps/GoalDetails";
-import { PlanningResources, planningResourcesStepSchema } from "@/components/Steps/PlanningResources";
-import { TrackingCommunication, trackingCommunicationStepSchema } from "@/components/Steps/TrackingCommunication";
+import { Stepper } from '@/components/Stepper'
+import { AdditionalCustomization, additionalCustomizationStepSchema } from '@/components/Steps/AdditionalCustomization'
+import { GoalDetails, goalDetailsStepSchema } from '@/components/Steps/GoalDetails'
+import { PlanningResources, planningResourcesStepSchema } from '@/components/Steps/PlanningResources'
+import { TrackingCommunication, trackingCommunicationStepSchema } from '@/components/Steps/TrackingCommunication'
 
-import { createGoal } from "../actions";
+import { createGoal } from '../actions'
 
 const schema = z.object({
   goalDetailsStep: goalDetailsStepSchema,
@@ -21,7 +21,7 @@ const schema = z.object({
 
 export type FormData = z.infer<typeof schema>
 
-export default function NewGoalPage () {
+export default function NewGoalPage() {
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
@@ -63,10 +63,10 @@ export default function NewGoalPage () {
   }
 
   return (
-    <div className="min-h-screen flex justify-center">
+    <div className="flex min-h-screen justify-center">
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <Stepper 
+          <Stepper
             steps={[
               {
                 label: 'Goal Details',

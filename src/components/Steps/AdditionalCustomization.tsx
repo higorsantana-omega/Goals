@@ -1,23 +1,22 @@
 'use client'
 
-import { useFormContext } from "react-hook-form";
-import { z } from "zod";
+import { useFormContext } from 'react-hook-form'
+import { z } from 'zod'
 
-import { FormData } from "@/app/new-goal/page";
+import { FormData } from '@/app/new-goal/page'
 
-import { StepHeader } from "../StepHeader";
-import { StepperFooter, StepperPreviousButton } from "../Stepper";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-
+import { StepHeader } from '../StepHeader'
+import { StepperFooter, StepperPreviousButton } from '../Stepper'
+import { Button } from '../ui/button'
+import { Input } from '../ui/input'
+import { Label } from '../ui/label'
 
 export const additionalCustomizationStepSchema = z.object({
   tags: z.string().min(1),
   additionalNotes: z.string().min(1)
 })
 
-export function AdditionalCustomization () {
+export function AdditionalCustomization() {
   const form = useFormContext<FormData>()
 
   return (
@@ -32,9 +31,7 @@ export function AdditionalCustomization () {
           <Label htmlFor="tags">Tags</Label>
           <Input id="tags" {...form.register('additionalCustomizationStep.tags')} />
           {form.formState.errors.additionalCustomizationStep?.tags && (
-            <small className="text-destructive">
-              {form.formState.errors.additionalCustomizationStep.tags.message}
-            </small>
+            <small className="text-destructive">{form.formState.errors.additionalCustomizationStep.tags.message}</small>
           )}
         </div>
 
@@ -48,16 +45,11 @@ export function AdditionalCustomization () {
           )}
         </div>
       </div>
-    
-      <StepperFooter>
-        <StepperPreviousButton 
-          disabled={form.formState.isSubmitting}
-        />
 
-        <Button
-          disabled={form.formState.isSubmitting}
-          type="submit"
-        >
+      <StepperFooter>
+        <StepperPreviousButton disabled={form.formState.isSubmitting} />
+
+        <Button disabled={form.formState.isSubmitting} type="submit">
           Submit
         </Button>
       </StepperFooter>

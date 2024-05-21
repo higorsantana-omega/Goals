@@ -2,19 +2,19 @@ import type { NextAuthConfig } from 'next-auth'
 
 export const authConfig = {
   session: {
-    strategy: 'jwt',
+    strategy: 'jwt'
   },
   secret: process.env.JWT_SECRET,
   pages: {
     error: '/',
     signIn: '/login',
-    signOut: '/',
+    signOut: '/'
   },
   callbacks: {
     authorized({ auth }) {
-    const isAuthenticated = !!auth?.user
-    return isAuthenticated
-    },
+      const isAuthenticated = !!auth?.user
+      return isAuthenticated
+    }
   },
-  providers: [],
+  providers: []
 } satisfies NextAuthConfig
