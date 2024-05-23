@@ -2,10 +2,11 @@
 
 import { genSaltSync, hashSync } from 'bcrypt-ts'
 import { eq } from 'drizzle-orm'
+import { redirect } from 'next/navigation'
 import { AuthError } from 'next-auth'
 
 import { signIn, signOut } from '@/auth'
-import { loginSchema } from '@/types/schema'
+import { loginSchema, registerSchema } from '@/types/schema'
 
 import db from '../../drizzle'
 import * as schema from '../../drizzle/schema'
@@ -26,16 +27,50 @@ export async function getUser(email: string) {
   return await db.select().from(schema.users).where(eq(schema.users.email, email))
 }
 
-export async function createUser(email: string, password: string) {
+export async function createUser(name: string, email: string, password: string) {
   const salt = genSaltSync(10)
   const hash = hashSync(password, salt)
 
-  return await db.insert(schema.users).values({ email, password: hash })
+  return await db.insert(schema.users).values({ name, email, password: hash })
 }
 
 const defaultValues = {
   email: '',
   password: ''
+}
+
+export async function register(prevState: any, formData: FormData) {
+  const name = formData.get('name') as string
+  const email = formData.get('email') as string
+  const password = formData.get('password') as string
+
+  const validatedFields = registerSchema.safeParse({
+    name: name,
+    email: email,
+    password: password
+  })
+
+  if (!validatedFields.success) {
+    return {
+      message: 'validation error',
+      errors: validatedFields.error.flatten().fieldErrors
+    }
+  }
+
+  const [user] = await getUser(email)
+  if (user) {
+    return {
+      message: 'user exists',
+      errors: {
+        ...defaultValues,
+        description: 'User already exists'
+      }
+    }
+  }
+
+  await createUser(name, email, password)
+
+  redirect('/login')
 }
 
 export async function login(prevState: any, formData: FormData) {
