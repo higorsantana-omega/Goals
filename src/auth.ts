@@ -16,6 +16,7 @@ export const {
     Credentials({
       name: 'credentials',
       credentials: {
+        name: { label: 'name', type: 'text' },
         email: { label: 'email', type: 'text' },
         password: { label: 'password', type: 'password' }
       },
@@ -28,6 +29,7 @@ export const {
 
         return {
           id: user.id,
+          name: user.name,
           email: user.email!
         } as unknown as User
       }
