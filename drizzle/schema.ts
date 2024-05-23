@@ -1,4 +1,4 @@
-import { pgTable, serial, text, date, boolean, pgEnum, integer, timestamp, varchar } from 'drizzle-orm/pg-core'
+import { boolean, date, integer, pgEnum, pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core'
 
 export const categories = [
   'Health',
@@ -21,6 +21,7 @@ export const prioritiesEnum = pgEnum('priority', [...priorities])
 
 export const users = pgTable('users', {
   id: serial('id').primaryKey(),
+  name: varchar('name', { length: 64 }),
   email: varchar('email', { length: 64 }),
   password: varchar('password', { length: 64 })
 })
