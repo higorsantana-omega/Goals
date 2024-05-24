@@ -1,5 +1,6 @@
 import Link from 'next/link'
 
+import { auth, signOut } from '@/auth'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -9,10 +10,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { getProfileName } from '@/lib/utils'
 
 import { Logo } from '../Logo'
 
-export function Header() {
+export async function Header() {
+  const session = await auth()
+
   return (
     <header className="flex h-16 shrink-0 items-center justify-between border-b px-4 md:px-6">
       <div className="flex items-center gap-6">
@@ -34,6 +38,7 @@ export function Header() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button className="rounded-full" size="icon" variant="outline">
+              {getProfileName(session?.user?.name || 'Unknown')}
               <span className="sr-only">Toggle user menu</span>
             </Button>
           </DropdownMenuTrigger>
@@ -43,7 +48,16 @@ export function Header() {
             <DropdownMenuItem className="cursor-pointer">Profile</DropdownMenuItem>
             <DropdownMenuItem className="cursor-pointer">Settings</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem className="cursor-pointer">Logout</DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer">
+              <form
+                action={async () => {
+                  'use server'
+                  await signOut()
+                }}
+              >
+                <button type='submit'>Logout</button>
+              </form>
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
