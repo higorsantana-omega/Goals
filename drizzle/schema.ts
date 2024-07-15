@@ -28,6 +28,7 @@ export const users = pgTable('users', {
 
 export const goals = pgTable('goals', {
   id: serial('id').primaryKey(),
+  userId: integer('userId').references(() => users.id),
   title: text('title').notNull(),
   description: text('description'),
   startDate: date('startDate').notNull(),
