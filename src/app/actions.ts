@@ -5,7 +5,7 @@ import { eq } from 'drizzle-orm'
 import { redirect } from 'next/navigation'
 import { AuthError } from 'next-auth'
 
-import { signIn, signOut } from '@/auth'
+import { auth, signIn, signOut } from '@/auth'
 import { loginSchema, registerSchema } from '@/types/schema'
 
 import db from '../../drizzle'
@@ -14,12 +14,20 @@ import * as schema from '../../drizzle/schema'
 type NewGoal = typeof schema.goals.$inferInsert
 
 export async function getGoals() {
-  const goals = await db.query.goals.findMany()
+  const session = await auth()
+  const [user] = await getUser(session?.user?.email as string)
+  const goals = await db.select().from(schema.goals).where(eq(schema.goals.userId, Number(user.id)))
   return goals
 }
 
 export async function createGoal(data: NewGoal) {
-  const goal = await db.insert(schema.goals).values(data).returning()
+  const sessin = await auth()
+  const [user] = await getUser(sessin?.user?.email as string)
+  const insert = {
+    ...data,
+    userId: user.id
+  }
+  const goal = await db.insert(schema.goals).values(insert).returning()
   return goal
 }
 
